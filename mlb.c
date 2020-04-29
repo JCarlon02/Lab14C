@@ -137,6 +137,18 @@ int teamComparison_name(const void *s1, const void *s2) {
   return result;
 }
 
+int teamComparisonByPayrollDesc(const void *s1, const void *s2) {
+  const Team *t1 = (const Team *)s1;
+  const Team *t2 = (const Team *)s2;
+  if (s1 < s2) {
+    return 1;
+  } else if (s1 == s2) {
+    return 0;
+  } else {
+    return -1;
+  }
+}
+
 int teamComparison_state(const void *s1, const void *s2) {
   const Team *t1 = (const Team *)s1;
   const Team *t2 = (const Team *)s2;
@@ -171,6 +183,20 @@ int teamComparison_winPercentage(const void *s1, const void *s2) {
 
 }
 
+int teamComparisonByWinPercentageIncrease(const void *s1, const void *s2) {
+  const Team *t1 = (const Team *)s1;
+  const Team *t2 = (const Team *)s2;
+  double t1_winPer = t1->wins / (double)(t1->wins + t1->loss);
+  double t2_winPer = t2->wins / (double)(t2->wins + t2->loss);
+
+  if (t1_winPer > t2_winPer) {
+    return 1;
+  } else if (t1_winPer == t2_winPer) {
+    return 0;
+  } else {
+    return -1;
+  }
+}
 //TODO: implement your own comprator function to order 
 //      Teams by payroll in descending order; be sure to
 //      add your function prototype to the mlb.h header file!
